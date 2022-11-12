@@ -8,3 +8,5 @@ target_link_libraries(tests PRIVATE
     string 
     vector
 )
+
+target_compile_options(tests PRIVATE -Werror -Wall -Wextra -Wpedantic -std=c++20)

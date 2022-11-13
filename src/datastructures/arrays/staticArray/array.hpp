@@ -6,16 +6,16 @@ namespace sidlib {
     struct array
     {
     public:
-        constexpr unsigned int Size() const {return S;}
+        constexpr unsigned int Size()           const {return S;}
         
-        T& operator[](unsigned int Index) {return m_Data[Index];}
-        T* Data() {return m_Data;}
+        T& operator[](unsigned int Index)             {return m_Data[Index];}
+        T* Data()                                     {return m_Data;}
 
         const T& operator[](unsigned int Index) const {return m_Data[Index];}
-        const T* Data() const {return m_Data;}
+        const T* Data()                         const {return m_Data;}
     private:
-        T*              m_Iterator;
-        T               m_Data[S];
+        T* m_Iterator;
+        T  m_Data[S];
     };
 }
 

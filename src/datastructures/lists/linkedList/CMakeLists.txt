@@ -1,2 +1,2 @@
-add_library(linkedlist linkedlist.cpp)
-target_link_directories(linkedlist PUBLIC .)
+add_library(linkedlist INTERFACE list.hpp)
+target_link_directories(linkedlist INTERFACE .)

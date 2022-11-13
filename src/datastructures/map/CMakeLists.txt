@@ -1,2 +1,2 @@
-add_library(map map.cpp)
-target_link_directories(map PUBLIC .)
+add_library(map INTERFACE map.hpp)
+target_link_directories(map INTERFACE .)

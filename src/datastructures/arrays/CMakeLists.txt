@@ -1,2 +1,2 @@
-add_subdirectory(dynamicArray)
-add_subdirectory(staticArray)
+add_subdirectory(dynamic_array)
+add_subdirectory(static_array)

@@ -1,6 +1,6 @@
-add_subdirectory(array)
+add_subdirectory(arrays)
+add_subdirectory(lists)
 add_subdirectory(map)
 add_subdirectory(queue)
 add_subdirectory(stack)
 add_subdirectory(string)
-add_subdirectory(vector)

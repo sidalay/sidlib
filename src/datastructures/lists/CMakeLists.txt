@@ -1,0 +1,2 @@
+add_subdirectory(doublyLinkedList)
+add_subdirectory(linkedList)

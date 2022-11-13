@@ -1,0 +1,2 @@
+add_library(doublylinkedlist doublylinkedlist.cpp)
+target_link_directories(doublylinkedlist PUBLIC .)

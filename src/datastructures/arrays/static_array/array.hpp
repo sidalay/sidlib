@@ -23,20 +23,41 @@ namespace sidlib
         using const_reverse_iterator  = std::reverse_iterator<const_pointer>;
 
         constexpr auto begin() {
-            return iterator{m_data};
+            return iterator{data()};
         }
         constexpr auto begin() const {
-            return const_iterator{m_data};
+            return const_iterator{data()};
+        }
+        constexpr auto cbegin() const {
+            return const_iterator{data()};
         }
 
+
         constexpr auto end() {
-            return iterator{m_data + S};
+            return iterator{data() + S};
         }
         constexpr auto end() const {
-            return const_iterator{m_data + S};
+            return const_iterator{data() + S};
+        }
+        constexpr auto cend() const {
+            return const_iterator{data() + S};
         }
         
         // access
+        constexpr reference front() {
+            return *begin();
+        }
+        constexpr const_reference front() const {
+            return *begin();
+        }
+
+        constexpr reference back() {
+            return *(end() - 1);
+        }
+        constexpr const_reference back() const {
+            return *(end() - 1);
+        }
+
         constexpr reference operator[](size_type index) {
             return m_data[index];
         }
@@ -50,20 +71,6 @@ namespace sidlib
         constexpr const_reference at(size_type index) const {
             return m_data[index];
         }
-
-        constexpr reference front() {
-            return *m_data;
-        }
-        constexpr const_reference front() const {
-            return *m_data;
-        }
-
-        constexpr reference back() {
-            return m_data[S - 1];
-        }
-        constexpr const_reference back() const {
-            return m_data[S - 1];
-        }
         
         constexpr pointer data() {
             return m_data;
@@ -73,13 +80,24 @@ namespace sidlib
         }
 
         // how many elements are currently held
-        constexpr size_type size() const { // TODO   
-            size_type count;             
+        constexpr size_type size() const { // THIS IS NOT IMPLEMENTED YET  
+            size_type count;
+            for (auto it = begin(); it != end(); ++it) {
+                if (it) {
+                    ++count;
+                }
+            }             
             return count;
         }
         // how many elements can be held
         constexpr size_type max_size() const {             
             return S;
+        }
+        constexpr bool empty() const {
+            if (size() == 0) {
+                return true;
+            }
+            return false;
         }
 
         // empty

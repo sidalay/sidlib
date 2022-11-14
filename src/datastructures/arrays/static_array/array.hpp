@@ -6,7 +6,7 @@
 
 namespace sidlib 
 {
-    template<typename T, unsigned int S>
+    template<typename T, size_t S>
     struct array
     {
     public:
@@ -19,13 +19,23 @@ namespace sidlib
         using reverse_iterator        = std::reverse_iterator<value_type*>;
         using const_reverse_iterator  = std::reverse_iterator<const value_type*>;
         
-        T& operator[](unsigned int index)             {return m_data[index];}
-        T* data()                                     {return m_data;}
+        T& operator[](size_t index) {
+            return m_data[index];
+        }
+        const T& operator[](size_t index) const {
+            return m_data[index];
+        }
+        
+        T* data() {
+            return m_data;
+        }
+        const T* data() const {
+            return m_data;
+        }
 
-        const T& operator[](unsigned int index) const {return m_data[index];}
-        const T* data()                         const {return m_data;}
-
-        constexpr unsigned int max_size()       const {return S;}
+        constexpr size_t max_size() const {
+            return S;
+        }
         // front
         // back
         // empty

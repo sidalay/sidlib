@@ -12,6 +12,10 @@ int main() {
     for (size_t i = 0; i < Data.max_size(); ++i) {
         std::cout << Data.at(i) << '\n';
     }
+    std::cout << '\n';
+    for (auto it = Data.rbegin(); it != Data.rend(); ++it) {
+        std::cout << *it << '\n';
+    }
     std::cout << "\n Data.front() = " << Data.front();
     std::cout << "\n Data.back() = " << Data.back();
 }

@@ -12,7 +12,7 @@ namespace sidlib
     public:
         using value_type              = T;
         using size_type               = size_t;
-        // using difference_type         = std::ptrdiff_t;
+        // using difference_type         = std::ptrdiff_t;      // searching to see what this is used for
         using pointer                 = value_type*;
         using const_pointer           = const value_type*;
         using reference               = value_type&;
@@ -31,7 +31,15 @@ namespace sidlib
         constexpr auto cbegin() const {
             return const_iterator{data()};
         }
-
+        constexpr auto rbegin() {
+            return reverse_iterator{end()};
+        }
+        constexpr auto rbegin() const {
+            return const_reverse_iterator{end()};
+        }
+        constexpr auto crbegin() const {
+            return const_reverse_iterator{end()};
+        }
 
         constexpr auto end() {
             return iterator{data() + S};
@@ -41,6 +49,15 @@ namespace sidlib
         }
         constexpr auto cend() const {
             return const_iterator{data() + S};
+        }
+        constexpr auto rend() {
+            return reverse_iterator{begin()};
+        }
+        constexpr auto rend() const {
+            return const_reverse_iterator{begin()};
+        }
+        constexpr auto crend() const {
+            return const_reverse_iterator{begin()};
         }
         
         // access
@@ -80,7 +97,7 @@ namespace sidlib
         }
 
         // how many elements are currently held
-        constexpr size_type size() const { // THIS IS NOT IMPLEMENTED YET  
+        constexpr size_type size() const { // THIS IMPLEMENTATION IS NOT DONE YET  
             size_type count;
             for (auto it = begin(); it != end(); ++it) {
                 if (it) {
@@ -93,6 +110,12 @@ namespace sidlib
         constexpr size_type max_size() const {             
             return S;
         }
+
+        constexpr void fill(value_type value) {
+            if (auto it = begin(); it != end(); ++it) {
+                *it = value;
+            }
+        }
         constexpr bool empty() const {
             if (size() == 0) {
                 return true;
@@ -100,7 +123,6 @@ namespace sidlib
             return false;
         }
 
-        // empty
         // fill
         // swap
     private:

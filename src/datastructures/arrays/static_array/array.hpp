@@ -13,12 +13,14 @@ namespace sidlib
         using value_type              = T;
         using size_type               = size_t;
         // using difference_type         = std::ptrdiff_t;
+        using pointer                 = value_type*;
+        using const_pointer           = const value_type*;
         using reference               = value_type&;
         using const_reference         = const value_type&;
-        using iterator                = value_type*;
-        using const_iterator          = const value_type*;
-        using reverse_iterator        = std::reverse_iterator<value_type*>;
-        using const_reverse_iterator  = std::reverse_iterator<const value_type*>;
+        using iterator                = pointer;
+        using const_iterator          = const_pointer;
+        using reverse_iterator        = std::reverse_iterator<pointer>;
+        using const_reverse_iterator  = std::reverse_iterator<const_pointer>;
 
         constexpr auto begin() {
             return iterator{m_data};
@@ -35,25 +37,38 @@ namespace sidlib
         }
         
         // access
-    
-        T& operator[](size_type index) {
+        constexpr reference operator[](size_type index) {
             return m_data[index];
         }
-        const T& operator[](size_type index) const {
+        constexpr const_reference operator[](size_type index) const {
             return m_data[index];
         }
 
-        T& at(size_type index) {
+        constexpr reference at(size_type index) {
             return m_data[index];
         }
-        const T& at(size_type index) const {
+        constexpr const_reference at(size_type index) const {
             return m_data[index];
+        }
+
+        constexpr reference front() {
+            return *m_data;
+        }
+        constexpr const_reference front() const {
+            return *m_data;
+        }
+
+        constexpr reference back() {
+            return m_data[S - 1];
+        }
+        constexpr const_reference back() const {
+            return m_data[S - 1];
         }
         
-        T* data() {
+        constexpr pointer data() {
             return m_data;
         }
-        const T* data() const {
+        constexpr const_pointer data() const {
             return m_data;
         }
 
@@ -67,8 +82,6 @@ namespace sidlib
             return S;
         }
 
-        // front
-        // back
         // empty
         // fill
         // swap

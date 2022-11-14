@@ -8,7 +8,10 @@ int main() {
     for (size_t i = 0; i < Data.max_size(); ++i) {
         Data[i] = i * 2;
     }
-    for (size_t i = 0; i < Data.max_size(); ++i) {
-        std::cout << Data.at(i) << '\n';
+    std::cout << '\n';
+    for (auto& Num : Data) {
+        std::cout << Num << '\n';
     }
+    std::cout << "\n Data.front() = " << Data.front();
+    std::cout << "\n Data.back() = " << Data.back();
 }

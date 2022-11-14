@@ -3,6 +3,7 @@
 
 #include <iterator>
 #include <cstddef>
+#include <stdexcept>
 
 namespace sidlib 
 {
@@ -76,16 +77,28 @@ namespace sidlib
         }
 
         constexpr reference operator[](size_type index) {
+            if (index >= S) {
+                // bad bad bad
+            }
             return m_data[index];
         }
         constexpr const_reference operator[](size_type index) const {
+            if (index >= S) {
+                // bad bad bad
+            }
             return m_data[index];
         }
 
         constexpr reference at(size_type index) {
+            if (index >= S) {
+                // bad bad bad
+            }
             return m_data[index];
         }
         constexpr const_reference at(size_type index) const {
+            if (index >= S) {
+                // bad bad bad
+            }
             return m_data[index];
         }
         
@@ -125,8 +138,7 @@ namespace sidlib
             }
             return false;
         }
-
-        // swap
+        
     private:
         T  m_data[S];
     };

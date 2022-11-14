@@ -112,10 +112,13 @@ namespace sidlib
         }
 
         constexpr void fill(value_type value) {
-            if (auto it = begin(); it != end(); ++it) {
+            for (auto it = begin(); it != end(); ++it) {
                 *it = value;
             }
         }
+        // constexpr void swap(array<value_type, size_type>& data) {
+
+        // }
         constexpr bool empty() const {
             if (size() == 0) {
                 return true;
@@ -123,7 +126,6 @@ namespace sidlib
             return false;
         }
 
-        // fill
         // swap
     private:
         T  m_data[S];

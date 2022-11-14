@@ -18,4 +18,9 @@ int main() {
     }
     std::cout << "\n Data.front() = " << Data.front();
     std::cout << "\n Data.back() = " << Data.back();
+
+    Data.fill(100);
+    for (auto& Num : Data) {
+        std::cout << Num << '\n';
+    }
 }

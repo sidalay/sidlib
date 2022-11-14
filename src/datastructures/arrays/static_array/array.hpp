@@ -11,18 +11,42 @@ namespace sidlib
     {
     public:
         using value_type              = T;
-        using difference_type         = std::ptrdiff_t;
+        using size_type               = size_t;
+        // using difference_type         = std::ptrdiff_t;
         using reference               = value_type&;
         using const_reference         = const value_type&;
         using iterator                = value_type*;
         using const_iterator          = const value_type*;
         using reverse_iterator        = std::reverse_iterator<value_type*>;
         using const_reverse_iterator  = std::reverse_iterator<const value_type*>;
+
+        constexpr auto begin() {
+            return iterator{m_data};
+        }
+        constexpr auto begin() const {
+            return const_iterator{m_data};
+        }
+
+        constexpr auto end() {
+            return iterator{m_data + S};
+        }
+        constexpr auto end() const {
+            return const_iterator{m_data + S};
+        }
         
-        T& operator[](size_t index) {
+        // access
+    
+        T& operator[](size_type index) {
             return m_data[index];
         }
-        const T& operator[](size_t index) const {
+        const T& operator[](size_type index) const {
+            return m_data[index];
+        }
+
+        T& at(size_type index) {
+            return m_data[index];
+        }
+        const T& at(size_type index) const {
             return m_data[index];
         }
         
@@ -33,13 +57,19 @@ namespace sidlib
             return m_data;
         }
 
-        constexpr size_t max_size() const {
+        // how many elements are currently held
+        constexpr size_type size() const { // TODO   
+            size_type count;             
+            return count;
+        }
+        // how many elements can be held
+        constexpr size_type max_size() const {             
             return S;
         }
+
         // front
         // back
         // empty
-        // size
         // fill
         // swap
     private:

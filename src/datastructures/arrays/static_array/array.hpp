@@ -7,13 +7,13 @@
 
 namespace sidlib 
 {
-    template<typename T, size_t S>
+    template<typename elem_t, size_t elem_s>
     struct array
     {
     public:
-        using value_type              = T;
+        using value_type              = elem_t;
         using size_type               = size_t;
-        // using difference_type         = std::ptrdiff_t;      // searching to see what this is used for
+        using difference_type         = std::ptrdiff_t;
         using pointer                 = value_type*;
         using const_pointer           = const value_type*;
         using reference               = value_type&;
@@ -43,13 +43,13 @@ namespace sidlib
         }
 
         constexpr auto end() {
-            return iterator{data() + S};
+            return iterator{data() + elem_s};
         }
         constexpr auto end() const {
-            return const_iterator{data() + S};
+            return const_iterator{data() + elem_s};
         }
         constexpr auto cend() const {
-            return const_iterator{data() + S};
+            return const_iterator{data() + elem_s};
         }
         constexpr auto rend() {
             return reverse_iterator{begin()};
@@ -77,11 +77,9 @@ namespace sidlib
         }
 
         constexpr reference operator[](size_type index) {
-            out_of_range_check(index);
             return m_data[index];
         }
         constexpr const_reference operator[](size_type index) const {
-            out_of_range_check(index);
             return m_data[index];
         }
 
@@ -101,19 +99,11 @@ namespace sidlib
             return m_data;
         }
 
-        // how many elements are currently held
-        constexpr size_type size() const { // THIS IMPLEMENTATION IS NOT DONE YET  
-            size_type count;
-            for (auto it = begin(); it != end(); ++it) {
-                if (it) {
-                    ++count;
-                }
-            }             
-            return count;
+        constexpr size_type size() const {
+            return elem_s;
         }
-        // how many elements can be held
         constexpr size_type max_size() const {             
-            return S;
+            return elem_s;
         }
 
         constexpr void fill(value_type value) {
@@ -132,13 +122,13 @@ namespace sidlib
         }
 
         constexpr void out_of_range_check(size_type index) const {
-            if (index >= S) {
-                std::__throw_out_of_range_fmt("[sidlib::array] attempt to access index outside of range");
+            if (index >= elem_s) {
+                throw std::out_of_range("RANGE ERROR: [sidlib::array] attempt to access index outside of range");
             }
         }
         
     private:
-        T  m_data[S];
+        value_type  m_data[elem_s];
     };
 }
 

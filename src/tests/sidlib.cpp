@@ -32,6 +32,7 @@ int main() {
         std::cout << Data.at(15) << '\n';
     }
     catch (std::out_of_range& err) {
-        std::cerr << "Out of Range error: " << err.what() << '\n';
+        std::cerr << err.what() << '\n';
     }
+
 }

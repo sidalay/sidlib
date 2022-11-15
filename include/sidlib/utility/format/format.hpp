@@ -1,0 +1,6 @@
+#ifndef SIDLIB_FORMAT_HPP
+#define SIDLIB_FORMAT_HPP
+
+
+
+#endif // SIDLIB_FORMAT_HPP

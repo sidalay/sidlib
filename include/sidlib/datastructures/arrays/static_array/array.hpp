@@ -1,5 +1,5 @@
-#ifndef SIDLIB_STATIC_ARRAY
-#define SIDLIB_STATIC_ARRAY
+#ifndef SIDLIB_STATIC_ARRAY_HPP
+#define SIDLIB_STATIC_ARRAY_HPP
 
 #include <iterator>
 #include <cstddef>
@@ -132,4 +132,4 @@ namespace sidlib
     };
 }
 
-#endif
+#endif // SIDLIB_STATIC_ARRAY_HPP

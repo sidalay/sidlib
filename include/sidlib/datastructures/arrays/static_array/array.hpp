@@ -24,6 +24,7 @@ namespace sidlib
         using reverse_iterator        = std::reverse_iterator<pointer>;
         using const_reverse_iterator  = std::reverse_iterator<const_pointer>;
 
+        // iterators
         constexpr auto begin() {
             return iterator{data()};
         }
@@ -63,27 +64,12 @@ namespace sidlib
         }
         
         // access
-        constexpr reference front() {
-            return *begin();
-        }
-        constexpr const_reference front() const {
-            return *begin();
-        }
-
-        constexpr reference back() {
-            return *(end() - 1);
-        }
-        constexpr const_reference back() const {
-            return *(end() - 1);
-        }
-
         constexpr reference operator[](size_type index) {
             return m_data[index];
         }
         constexpr const_reference operator[](size_type index) const {
             return m_data[index];
         }
-
         constexpr reference at(size_type index) {
             out_of_range_check(index);
             return m_data[index];
@@ -92,6 +78,52 @@ namespace sidlib
             out_of_range_check(index);
             return m_data[index];
         }
+        constexpr reference front() {
+            return *begin();
+        }
+        constexpr const_reference front() const {
+            return *begin();
+        }
+        constexpr reference back() {
+            return *(end() - 1);
+        }
+        constexpr const_reference back() const {
+            return *(end() - 1);
+        }
+
+        // capacity
+        constexpr size_type size() const {
+            return elem_s;
+        }
+        constexpr size_type max_size() const {             
+            return elem_s;
+        }
+        constexpr bool empty() const {
+            return size() == 0 ? true : false;
+        }
+
+        // utility
+        constexpr void fill(value_type value) {
+            for (auto it = begin(); it != end(); ++it) {
+                *it = value;
+            }
+        }
+        constexpr void swap(array& other) {
+            array<value_type, elem_s> temp;
+            for (size_t i = 0; i < size(); ++i) {
+                temp[i] = other[i];
+                other[i] = m_data[i];
+                m_data[i] = temp[i];
+            }
+        }
+
+        // constructors
+        array() {
+            fill(0);
+        }
+        
+    private:
+        value_type m_data[elem_s];
         
         constexpr pointer data() {
             return m_data;
@@ -100,36 +132,11 @@ namespace sidlib
             return m_data;
         }
 
-        constexpr size_type size() const {
-            return elem_s;
-        }
-        constexpr size_type max_size() const {             
-            return elem_s;
-        }
-
-        constexpr void fill(value_type value) {
-            for (auto it = begin(); it != end(); ++it) {
-                *it = value;
-            }
-        }
-        // constexpr void swap(array<value_type, size_type>& other_data) {
-
-        // }
-        constexpr bool empty() const {
-            if (size() == 0) {
-                return true;
-            }
-            return false;
-        }
-
         constexpr void out_of_range_check(size_type index) const {
             if (index >= elem_s) {
                 throw std::out_of_range(sidlib::format("\nRANGE ERROR: [sidlib::array]\n\t     Attempt to access index [{}] when max size is [{}]\n", index, elem_s));
             }
         }
-        
-    private:
-        value_type  m_data[elem_s];
     };
 }
 

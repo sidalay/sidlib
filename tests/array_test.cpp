@@ -35,4 +35,27 @@ int main() {
 
     std::cout << "Data is empty: " << (Data.empty() ? "True" : "False") << '\n';
 
+    sidlib::array<int, 5> DataTwo;
+
+    std::cout << "\n\nBefore Swap: \n";
+    std::cout << "\nDataOne Array\t: ";
+    for (auto& Num:Data) {
+        std::cout << Num << ' ';
+    }
+    std::cout << "\nDataTwo Array\t: ";
+    for (auto& Num:DataTwo) {
+        std::cout << Num << ' ';
+    }
+
+    Data.swap(DataTwo);
+
+    std::cout << "\n\nAfter Swap: \n";
+    std::cout << "\nDataOne Array\t: ";
+    for (auto& Num:Data) {
+        std::cout << Num << ' ';
+    }
+    std::cout << "\nDataTwo Array\t: ";
+    for (auto& Num:DataTwo) {
+        std::cout << Num << ' ';
+    }
 }

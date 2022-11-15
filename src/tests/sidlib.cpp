@@ -1,6 +1,7 @@
 #include <array.hpp>
 #include <iostream>
 #include <array>
+#include <vector>
 
 int main() {
     sidlib::array<int, 10> Data;
@@ -22,5 +23,15 @@ int main() {
     Data.fill(100);
     for (auto& Num : Data) {
         std::cout << Num << '\n';
+    }
+
+    Data.fill(8);
+
+    try {
+        std::cout << Data[2] << '\n';
+        std::cout << Data.at(15) << '\n';
+    }
+    catch (std::out_of_range& err) {
+        std::cerr << "Out of Range error: " << err.what() << '\n';
     }
 }

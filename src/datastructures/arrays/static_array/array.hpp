@@ -77,28 +77,20 @@ namespace sidlib
         }
 
         constexpr reference operator[](size_type index) {
-            if (index >= S) {
-                // bad bad bad
-            }
+            out_of_range_check(index);
             return m_data[index];
         }
         constexpr const_reference operator[](size_type index) const {
-            if (index >= S) {
-                // bad bad bad
-            }
+            out_of_range_check(index);
             return m_data[index];
         }
 
         constexpr reference at(size_type index) {
-            if (index >= S) {
-                // bad bad bad
-            }
+            out_of_range_check(index);
             return m_data[index];
         }
         constexpr const_reference at(size_type index) const {
-            if (index >= S) {
-                // bad bad bad
-            }
+            out_of_range_check(index);
             return m_data[index];
         }
         
@@ -129,7 +121,7 @@ namespace sidlib
                 *it = value;
             }
         }
-        // constexpr void swap(array<value_type, size_type>& data) {
+        // constexpr void swap(array<value_type, size_type>& other_data) {
 
         // }
         constexpr bool empty() const {
@@ -137,6 +129,12 @@ namespace sidlib
                 return true;
             }
             return false;
+        }
+
+        constexpr void out_of_range_check(size_type index) const {
+            if (index >= S) {
+                std::__throw_out_of_range_fmt("[sidlib::array] attempt to access index outside of range");
+            }
         }
         
     private:

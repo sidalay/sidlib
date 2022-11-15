@@ -1,8 +1,8 @@
 #ifndef SIDLIB_STATIC_ARRAY_HPP
 #define SIDLIB_STATIC_ARRAY_HPP
 
-#include <iterator>
 #include <cstddef>
+#include <iterator>
 #include <stdexcept>
 #include "format.hpp"
 
@@ -25,90 +25,90 @@ namespace sidlib
         using const_reverse_iterator  = std::reverse_iterator<const_pointer>;
 
         // iterators
-        constexpr auto begin() {
+        [[nodiscard]] constexpr auto begin() noexcept {
             return iterator{data()};
         }
-        constexpr auto begin() const {
+        [[nodiscard]] constexpr auto begin() const noexcept {
             return const_iterator{data()};
         }
-        constexpr auto cbegin() const {
+        [[nodiscard]] constexpr auto cbegin() const noexcept {
             return const_iterator{data()};
         }
-        constexpr auto rbegin() {
+        [[nodiscard]] constexpr auto rbegin() noexcept {
             return reverse_iterator{end()};
         }
-        constexpr auto rbegin() const {
+        [[nodiscard]] constexpr auto rbegin() const noexcept {
             return const_reverse_iterator{end()};
         }
-        constexpr auto crbegin() const {
+        [[nodiscard]] constexpr auto crbegin() const noexcept {
             return const_reverse_iterator{end()};
         }
 
-        constexpr auto end() {
+        [[nodiscard]] constexpr auto end() noexcept {
             return iterator{data() + elem_s};
         }
-        constexpr auto end() const {
+        [[nodiscard]] constexpr auto end() const noexcept {
             return const_iterator{data() + elem_s};
         }
-        constexpr auto cend() const {
+        [[nodiscard]] constexpr auto cend() const noexcept {
             return const_iterator{data() + elem_s};
         }
-        constexpr auto rend() {
+        [[nodiscard]] constexpr auto rend() noexcept {
             return reverse_iterator{begin()};
         }
-        constexpr auto rend() const {
+        [[nodiscard]] constexpr auto rend() const noexcept {
             return const_reverse_iterator{begin()};
         }
-        constexpr auto crend() const {
+        [[nodiscard]] constexpr auto crend() const noexcept {
             return const_reverse_iterator{begin()};
         }
         
         // access
-        constexpr reference operator[](size_type index) {
+        [[nodiscard]] constexpr reference operator[](size_type index) noexcept {
             return m_data[index];
         }
-        constexpr const_reference operator[](size_type index) const {
+        [[nodiscard]] constexpr const_reference operator[](size_type index) const noexcept {
             return m_data[index];
         }
-        constexpr reference at(size_type index) {
+        [[nodiscard]] constexpr reference at(size_type index) {
             out_of_range_check(index);
             return m_data[index];
         }
-        constexpr const_reference at(size_type index) const {
+        [[nodiscard]] constexpr const_reference at(size_type index) const {
             out_of_range_check(index);
             return m_data[index];
         }
-        constexpr reference front() {
+        [[nodiscard]] constexpr reference front() noexcept {
             return *begin();
         }
-        constexpr const_reference front() const {
+        [[nodiscard]] constexpr const_reference front() const noexcept {
             return *begin();
         }
-        constexpr reference back() {
+        [[nodiscard]] constexpr reference back() noexcept {
             return *(end() - 1);
         }
-        constexpr const_reference back() const {
+        [[nodiscard]] constexpr const_reference back() const noexcept {
             return *(end() - 1);
         }
 
         // capacity
-        constexpr size_type size() const {
+        [[nodiscard]] constexpr size_type size() const noexcept {
             return elem_s;
         }
-        constexpr size_type max_size() const {             
+        [[nodiscard]] constexpr size_type max_size() const noexcept {             
             return elem_s;
         }
-        constexpr bool empty() const {
+        [[nodiscard]] constexpr bool empty() const noexcept {
             return size() == 0 ? true : false;
         }
 
         // utility
-        constexpr void fill(value_type value) {
+        constexpr void fill(value_type value) noexcept {
             for (auto it = begin(); it != end(); ++it) {
                 *it = value;
             }
         }
-        constexpr void swap(array& other) {
+        constexpr void swap(array& other) noexcept {
             array<value_type, elem_s> temp;
             for (size_t i = 0; i < size(); ++i) {
                 temp[i] = other[i];
@@ -125,10 +125,10 @@ namespace sidlib
     private:
         value_type m_data[elem_s];
         
-        constexpr pointer data() {
+        [[nodiscard]] constexpr pointer data() noexcept {
             return m_data;
         }
-        constexpr const_pointer data() const {
+        [[nodiscard]] constexpr const_pointer data() const noexcept {
             return m_data;
         }
 

@@ -1,3 +1,0 @@
-add_subdirectory(algorithm)
-add_subdirectory(datastructures)
-add_subdirectory(tests)

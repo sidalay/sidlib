@@ -1,7 +1,5 @@
-#include <array.hpp>
 #include <iostream>
-#include <array>
-#include <vector>
+#include "array.hpp"
 
 int main() {
     sidlib::array<int, 10> Data;

@@ -4,6 +4,7 @@
 #include <iterator>
 #include <cstddef>
 #include <stdexcept>
+#include "format.hpp"
 
 namespace sidlib 
 {
@@ -123,7 +124,7 @@ namespace sidlib
 
         constexpr void out_of_range_check(size_type index) const {
             if (index >= elem_s) {
-                throw std::out_of_range("RANGE ERROR: [sidlib::array] attempt to access index outside of range");
+                throw std::out_of_range(sidlib::format("\nRANGE ERROR: [sidlib::array]\n\t     Attempt to access index [{}] when max size is [{}]\n", index, elem_s));
             }
         }
         

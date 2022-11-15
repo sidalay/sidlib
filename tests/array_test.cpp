@@ -2,35 +2,37 @@
 #include "array.hpp"
 
 int main() {
-    sidlib::array<int, 10> Data;
+    sidlib::array<int, 5> Data;
 
     for (size_t i = 0; i < Data.max_size(); ++i) {
         Data[i] = i * 2;
     }
-    std::cout << '\n';
+    std::cout << "Print using normal for-loop\t: ";
     for (size_t i = 0; i < Data.max_size(); ++i) {
-        std::cout << Data.at(i) << '\n';
+        std::cout << Data.at(i) << ' ';
     }
-    std::cout << '\n';
+    std::cout << "\nPrint using reverse iterators\t: ";
     for (auto it = Data.rbegin(); it != Data.rend(); ++it) {
-        std::cout << *it << '\n';
+        std::cout << *it << ' ';
     }
-    std::cout << "\n Data.front() = " << Data.front();
-    std::cout << "\n Data.back() = " << Data.back();
-
+    std::cout << "\nPrint using ranged based loop\t: ";
     Data.fill(100);
     for (auto& Num : Data) {
-        std::cout << Num << '\n';
+        std::cout << Num << ' ';
     }
 
-    Data.fill(8);
+    Data[0] = 320;
+    Data.back() = 627;
+    std::cout << "\n\nData.front() = " << Data.front();
+    std::cout << "\nData.back()  = " << Data.back() << '\n';
 
     try {
-        std::cout << Data[2] << '\n';
         std::cout << Data.at(15) << '\n';
     }
     catch (std::out_of_range& err) {
         std::cerr << err.what() << '\n';
     }
+
+    std::cout << "Data is empty: " << (Data.empty() ? "True" : "False") << '\n';
 
 }

@@ -1,2 +1,2 @@
 add_library(stack INTERFACE stack.hpp)
-target_link_directories(stack INTERFACE .)
+target_include_directories(stack INTERFACE .)

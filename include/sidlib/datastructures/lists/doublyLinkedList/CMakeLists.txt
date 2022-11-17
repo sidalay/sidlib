@@ -1,2 +1,2 @@
 add_library(doublylinkedlist INTERFACE dl_list.hpp)
-target_link_directories(doublylinkedlist INTERFACE .)
+target_include_directories(doublylinkedlist INTERFACE .)

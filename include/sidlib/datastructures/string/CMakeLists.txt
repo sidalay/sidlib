@@ -1,2 +1,2 @@
 add_library(string INTERFACE string.hpp)
-target_link_directories(string INTERFACE .)
+target_include_directories(string INTERFACE .)

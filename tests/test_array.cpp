@@ -21,7 +21,7 @@ int main() {
         std::cout << Num << ' ';
     }
 
-    Data[0] = 320;
+    Data.front() = 320;
     Data.back() = 627;
     std::cout << "\n\nData.front() = " << Data.front();
     std::cout << "\nData.back()  = " << Data.back() << '\n';

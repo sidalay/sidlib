@@ -14,7 +14,7 @@ namespace sidlib
     public:
         using value_type                = elem_t;
         using size_type                 = size_t;
-        using difference_type           = std::ptrdiff_t;
+        using difference_type           = ptrdiff_t;
         using pointer                   = value_type*;
         using const_pointer             = const value_type*;
         using reference                 = value_type&;

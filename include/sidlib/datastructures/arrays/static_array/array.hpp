@@ -14,7 +14,7 @@ namespace sidlib
     public:
         using value_type              = elem_t;
         using size_type               = size_t;
-        using difference_type         = std::ptrdiff_t;
+        using difference_type         = ptrdiff_t;
         using pointer                 = value_type*;
         using const_pointer           = const value_type*;
         using reference               = value_type&;
@@ -114,7 +114,7 @@ namespace sidlib
         }
         constexpr void swap(array& other) noexcept {
             array<value_type, elem_s> temp;
-            for (size_t i = 0; i < size(); ++i) {
+            for (size_type i = 0; i < size(); ++i) {
                 temp[i] = other[i];
                 other[i] = m_data[i];
                 m_data[i] = temp[i];

@@ -1,7 +1,6 @@
 #include <iostream>
 #include <string>
 #include "dArray.hpp"
-#include <array>
 
 template <typename T>
 void print_dynamic(const sidlib::darray<T>& darray) {

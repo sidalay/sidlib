@@ -103,6 +103,10 @@ namespace sidlib
         }
 
         // utility
+        constexpr void insert(size_type index, value_type value) {
+            out_of_range_check(index);
+            m_data[index] = value;
+        }
         constexpr void fill(value_type value) noexcept {
             for (auto it = begin(); it != end(); ++it) {
                 *it = value;

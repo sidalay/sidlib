@@ -58,4 +58,12 @@ int main() {
     for (auto& Num:DataTwo) {
         std::cout << Num << ' ';
     }
+
+    try {
+        Data.insert(5, 3);
+        std::cout << "\n\nDataOne[4]: " << Data.at(4);
+    }
+    catch (std::out_of_range& err) {
+        std::cerr << err.what() << '\n';
+    }
 }

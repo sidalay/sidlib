@@ -24,6 +24,45 @@ namespace sidlib
         using reverse_iterator          = std::reverse_iterator<pointer>;
         using const_reverse_iterator    = std::reverse_iterator<const_pointer>;        
 
+        // iterators
+        [[nodiscard]] constexpr auto begin() noexcept {
+            return iterator{data()};
+        }
+        [[nodiscard]] constexpr auto begin() const noexcept {
+            return const_iterator{data()};
+        }
+        [[nodiscard]] constexpr auto cbegin() const noexcept {
+            return const_iterator{data()};
+        }
+        [[nodiscard]] constexpr auto rbegin() noexcept {
+            return reverse_iterator{end()};
+        }
+        [[nodiscard]] constexpr auto rbegin() const noexcept {
+            return const_reverse_iterator{end()};
+        }
+        [[nodiscard]] constexpr auto crbegin() const noexcept {
+            return const_reverse_iterator{end()};
+        }
+        
+        [[nodiscard]] constexpr auto end() noexcept {
+            return iterator{data() + m_capacity};
+        }
+        [[nodiscard]] constexpr auto end() const noexcept {
+            return const_iterator{data() + m_capacity};
+        }
+        [[nodiscard]] constexpr auto cend() const noexcept {
+            return const_iterator{data() + m_capacity};
+        }
+        [[nodiscard]] constexpr auto rend() noexcept {
+            return iterator{begin()};
+        }
+        [[nodiscard]] constexpr auto rend() const noexcept {
+            return const_reverse_iterator{begin()};
+        }
+        [[nodiscard]] constexpr auto crend() const noexcept {
+            return const_reverse_iterator{begin()};
+        }
+
         darray() {
             // allocate 2 elements
             realloc(2);

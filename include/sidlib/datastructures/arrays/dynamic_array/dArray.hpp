@@ -45,13 +45,13 @@ namespace sidlib
         }
         
         [[nodiscard]] constexpr auto end() noexcept {
-            return iterator{data() + m_capacity};
+            return iterator{data() + m_size};
         }
         [[nodiscard]] constexpr auto end() const noexcept {
-            return const_iterator{data() + m_capacity};
+            return const_iterator{data() + m_size};
         }
         [[nodiscard]] constexpr auto cend() const noexcept {
-            return const_iterator{data() + m_capacity};
+            return const_iterator{data() + m_size};
         }
         [[nodiscard]] constexpr auto rend() noexcept {
             return iterator{begin()};
@@ -95,13 +95,43 @@ namespace sidlib
             if (m_size >= m_capacity) {
                 realloc(m_capacity + (m_capacity/2));
             }
-            m_data[m_size++] = value;
+            new(&m_data[m_size++]) value_type(std::move(value));
+        }
+        constexpr void push_back(value_type&& value) {
+            if (m_size >= m_capacity) {
+                realloc(m_capacity + (m_capacity/2));
+            }
+            new(&m_data[m_size++]) value_type(std::move(value));
+        }
+
+        constexpr void pop_back() {
+            if (m_size > 0) {
+                m_data[--m_size].~value_type();
+            }
+        }
+
+        template<typename... args>
+        constexpr value_type& emplace_back(args&&... arg) {
+            if (m_size >= m_capacity) {
+                realloc(m_capacity + (m_capacity/2));
+            }
+            return m_data[m_size++] = value_type(std::forward<args>(arg)...);
+        }
+
+        constexpr void clear() {
+            for (size_type i = 0; i < m_size; ++i) {
+                m_data[i].~value_type();
+            }
+            m_size = 0;
         }
 
         // constructor
         darray() {
-            // allocate 2 elements
             realloc(2);
+        }
+        ~darray() {
+            clear();
+            ::operator delete(m_data, m_capacity * sizeof(value_type));
         }
         // size
         // max_size
@@ -130,37 +160,37 @@ namespace sidlib
         }
 
         constexpr void out_of_range_check(size_type index) const {
-            if (index >= m_capacity) {
+            if (index > m_size) {
                 throw std::out_of_range(sidlib::format(
-                    "\nRANGE ERROR: [sidlib::darray]\n\t     "
-                    "Attempt to access index [{}] when max size is [{}]\n", index, m_capacity));
+                    "\nRANGE ERROR: [sidlib::darray]\n\t    "
+                    "Attempt to access index [{}] when size is [{}]\n", index, m_size));
             }
         }
 
         constexpr void realloc(size_type new_capacity) {
-            // 1. allocate a new block of memory
-            // 2. copy/move elemnts from old to new
-            // 3. delete old block
-
-            value_type* new_block = new value_type[new_capacity];
+            value_type* new_block = (pointer)::operator new(new_capacity * sizeof(value_type));
 
             if (new_capacity < m_size) {
                 m_size = new_capacity;
             }
 
-            for (size_type i = 0; i < m_size; i++) {
-                new_block[i] = m_data[i];
+            for (size_type i = 0; i < m_size; ++i) {
+                new(&new_block[i]) value_type(std::move(m_data[i]));
             }
 
-            delete[] m_data;
+            for (size_type i = 0; i < m_size; ++i) {
+                m_data[i].~value_type();
+            }
+
+            ::operator delete(m_data, m_capacity * sizeof(value_type));
             m_data = new_block;
             m_capacity = new_capacity;
         }
 
     private:
-        pointer m_data = nullptr;
-        size_type m_size = 0;
-        size_type m_capacity = 0;
+        pointer m_data{nullptr};
+        size_type m_size{0};
+        size_type m_capacity{0};
     };
 }
 

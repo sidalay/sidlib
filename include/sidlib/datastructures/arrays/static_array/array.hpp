@@ -138,7 +138,7 @@ namespace sidlib
             if (index >= elem_s) {
                 throw std::out_of_range(sidlib::format(
                     "\nRANGE ERROR: [sidlib::array]\n\t     "
-                    "Attempt to access index [{}] when max size is [{}]\n", index, elem_s));
+                    "Attempt to access index [{}] when capacity is [{}]\n", index, elem_s));
             }
         }
 

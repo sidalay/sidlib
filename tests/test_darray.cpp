@@ -5,7 +5,8 @@
 template <typename T>
 void print_dynamic(const sidlib::darray<T>& darray) {
     if (darray.size() == 0) {
-        std::cout << "dynamic array is empty";
+        std::cout << "dynamic array is empty\n";
+        return;
     }
     for (auto& elem : darray) {
         std::cout << elem << ' ';
@@ -39,8 +40,29 @@ int main() {
     data.push_back("more");
     data.push_back("elements");
     
+    std::cout << "data.empty()\t: " << (data.empty() ? "true" : "false") << '\n';
     print_dynamic(data);
     print_capacity(data);
+
+    data.pop_back();
+    print_dynamic(data);
+    print_capacity(data);
+
+    data.emplace_back("fire");
+    print_dynamic(data);
+    print_capacity(data);
+
+    data.clear();
+    print_dynamic(data);
+    print_capacity(data);
+
+    std::cout << "data.empty()\t: " << (data.empty() ? "true" : "false") << '\n';
     // -----------------------------------------------
 
+    try {
+        std::cout << data.at(10) << '\n';
+    }
+    catch (std::out_of_range& err) {
+        std::cerr << err.what() << '\n';
+    }
 }

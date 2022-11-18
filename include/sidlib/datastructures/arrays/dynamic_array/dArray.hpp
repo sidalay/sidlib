@@ -172,10 +172,10 @@ namespace sidlib
         }
 
         constexpr void out_of_range_check(size_type index) const {
-            if (index > m_size) {
+            if (index >= m_capacity) {
                 throw std::out_of_range(sidlib::format(
                     "\nRANGE ERROR: [sidlib::darray]\n\t     "
-                    "Attempt to access index [{}] when size is [{}]\n", index, m_size));
+                    "Attempt to access index [{}] when max index is [{}]\n", index, m_capacity - 1));
             }
         }
 

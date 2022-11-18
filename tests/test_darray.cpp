@@ -61,7 +61,7 @@ int main() {
     // -----------------------------------------------
 
     try {
-        std::cout << data.at(10) << '\n';
+        std::cout << data.at(9) << '\n';
     }
     catch (std::out_of_range& err) {
         std::cerr << err.what() << '\n';

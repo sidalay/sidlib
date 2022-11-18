@@ -63,9 +63,14 @@ namespace sidlib
             return const_reverse_iterator{begin()};
         }
 
+        // capacity
+
         // utility
         constexpr void push_back(const value_type& value) {
-            
+            if (m_size >= m_capacity) {
+                realloc(m_capacity + (m_capacity/2));
+            }
+            m_data[m_size++] = value;
         }
 
         // constructor

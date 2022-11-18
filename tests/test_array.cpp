@@ -1,6 +1,18 @@
 #include <iostream>
 #include "array.hpp"
 
+template <typename T, size_t S>
+void print_static(const sidlib::array<T,S>& array) {
+    if (array.size() == 0) {
+        std::cout << "static array is empty\n";
+        return;
+    }
+    for (auto& elem : array) {
+        std::cout << elem << ' ';
+    }
+    std::cout << "\n---------------------------------------\n";
+}
+
 int main() {
     sidlib::array<int, 5> Data;
 
@@ -17,14 +29,11 @@ int main() {
     }
     std::cout << "\nPrint using ranged based loop\t: ";
     Data.fill(100);
-    for (auto& Num : Data) {
-        std::cout << Num << ' ';
-    }
+    print_static(Data);
 
     Data.front() = 320;
     Data.back() = 627;
-    std::cout << "\n\nData.front() = " << Data.front();
-    std::cout << "\nData.back()  = " << Data.back() << '\n';
+    print_static(Data);
 
     try {
         std::cout << Data.at(15) << '\n';
@@ -37,27 +46,19 @@ int main() {
 
     sidlib::array<int, 5> DataTwo;
 
-    std::cout << "\n\nBefore Swap: \n";
-    std::cout << "\nDataOne Array\t: ";
-    for (auto& Num:Data) {
-        std::cout << Num << ' ';
-    }
-    std::cout << "\nDataTwo Array\t: ";
-    for (auto& Num:DataTwo) {
-        std::cout << Num << ' ';
-    }
-
+    std::cout << "\n[Before Swap]: \n";
+    std::cout << "DataOne Array\t: ";
+    print_static(Data);
+    std::cout << "DataTwo Array\t: ";
+    print_static(DataTwo);
     Data.swap(DataTwo);
 
-    std::cout << "\n\nAfter Swap: \n";
-    std::cout << "\nDataOne Array\t: ";
-    for (auto& Num:Data) {
-        std::cout << Num << ' ';
-    }
-    std::cout << "\nDataTwo Array\t: ";
-    for (auto& Num:DataTwo) {
-        std::cout << Num << ' ';
-    }
+    std::cout << "\n[After Swap]: \n";
+    std::cout << "DataOne Array\t: ";
+    print_static(Data);
+
+    std::cout << "DataTwo Array\t: ";
+    print_static(DataTwo);
 
     try {
         Data.insert(5, 3);

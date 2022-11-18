@@ -64,6 +64,15 @@ namespace sidlib
         }
 
         // capacity
+        [[nodiscard]] constexpr size_type size() const noexcept {
+            return m_size;
+        }
+        [[nodiscard]] constexpr size_type capacity() const noexcept {
+            return m_capacity;
+        }
+        [[nodiscard]] constexpr bool empty() const noexcept {
+            return size() == 0 ? true : false;
+        }
 
         // utility
         constexpr void push_back(const value_type& value) {

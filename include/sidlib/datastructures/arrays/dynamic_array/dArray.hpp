@@ -70,13 +70,25 @@ namespace sidlib
         [[nodiscard]] constexpr const_reference operator[](size_type index) const noexcept {
             return m_data[index];
         }
-        [[nodiscard]] constexpr reference at(size_type index) noexcept {
+        [[nodiscard]] constexpr reference at(size_type index) {
             out_of_range_check(index);
             return m_data[index];
         }
-        [[nodiscard]] constexpr const_reference at(size_type index) const noexcept {
+        [[nodiscard]] constexpr const_reference at(size_type index) const {
             out_of_range_check(index);
             return m_data[index];
+        }
+        [[nodiscard]] constexpr reference front() noexcept {
+            return *begin();
+        }
+        [[nodiscard]] constexpr const_reference front() const noexcept {
+            return *begin();
+        }
+        [[nodiscard]] constexpr reference back() noexcept {
+            return *(end() - 1);
+        }
+        [[nodiscard]] constexpr const_reference back() const noexcept {
+            return *(end() - 1);
         }
 
         // capacity
@@ -162,7 +174,7 @@ namespace sidlib
         constexpr void out_of_range_check(size_type index) const {
             if (index > m_size) {
                 throw std::out_of_range(sidlib::format(
-                    "\nRANGE ERROR: [sidlib::darray]\n\t    "
+                    "\nRANGE ERROR: [sidlib::darray]\n\t     "
                     "Attempt to access index [{}] when size is [{}]\n", index, m_size));
             }
         }

@@ -63,6 +63,22 @@ namespace sidlib
             return const_reverse_iterator{begin()};
         }
 
+        // access
+        [[nodiscard]] constexpr reference operator[](size_type index) noexcept {
+            return m_data[index];
+        }
+        [[nodiscard]] constexpr const_reference operator[](size_type index) const noexcept {
+            return m_data[index];
+        }
+        [[nodiscard]] constexpr reference at(size_type index) noexcept {
+            out_of_range_check(index);
+            return m_data[index];
+        }
+        [[nodiscard]] constexpr const_reference at(size_type index) const noexcept {
+            out_of_range_check(index);
+            return m_data[index];
+        }
+
         // capacity
         [[nodiscard]] constexpr size_type size() const noexcept {
             return m_size;
@@ -114,10 +130,10 @@ namespace sidlib
         }
 
         constexpr void out_of_range_check(size_type index) const {
-            if (index >= elem_s) {
+            if (index >= m_capacity) {
                 throw std::out_of_range(sidlib::format(
                     "\nRANGE ERROR: [sidlib::darray]\n\t     "
-                    "Attempt to access index [{}] when max size is [{}]\n", index, elem_s));
+                    "Attempt to access index [{}] when max size is [{}]\n", index, m_capacity));
             }
         }
 
@@ -142,7 +158,7 @@ namespace sidlib
         }
 
     private:
-        pointer m_data = new value_type[];
+        pointer m_data = nullptr;
         size_type m_size = 0;
         size_type m_capacity = 0;
     };

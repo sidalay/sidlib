@@ -1,5 +1,5 @@
-#ifndef SIDLIB_DYNAMIC_ARRAY
-#define SIDLIB_DYNAMIC_ARRAY
+#ifndef SIDLIB_DYNAMIC_ARRAY_HPP
+#define SIDLIB_DYNAMIC_ARRAY_HPP
 
 #include <cstddef>
 #include <iterator>
@@ -115,7 +115,6 @@ namespace sidlib
             }
             new(&m_data[m_size++]) value_type(std::move(value));
         }
-
         constexpr void pop_back() {
             if (m_size > 0) {
                 m_data[--m_size].~value_type();
@@ -145,23 +144,12 @@ namespace sidlib
             clear();
             ::operator delete(m_data, m_capacity * sizeof(value_type));
         }
-        // size
-        // max_size
+
         // reserve
-        // resize
-        // shrink_to_fit
+        // shrink
         
-        // at
-        // front
-        // back
-        // data
-        
-        // assign & operator=
-        // clear
         // erase
         // remove
-        // push_back
-        // pop_back
         // insert
     private:   
         [[nodiscard]] constexpr pointer data() noexcept {
@@ -206,4 +194,4 @@ namespace sidlib
     };
 }
 
-#endif
+#endif // SIDLIB_DYNAMIC_ARRAY_HPP

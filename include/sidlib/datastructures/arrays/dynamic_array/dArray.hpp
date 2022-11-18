@@ -4,6 +4,7 @@
 #include <cstddef>
 #include <iterator>
 #include <stdexcept>
+#include "format.hpp"
 
 namespace sidlib 
 {
@@ -14,8 +15,8 @@ namespace sidlib
         using value_type                = elem_t;
         using size_type                 = size_t;
         using difference_type           = std::ptrdiff_t;
-        using pointer                   = value_type*
-        using const_pointer             = const value_type*
+        using pointer                   = value_type*;
+        using const_pointer             = const value_type*;
         using reference                 = value_type&;
         using const_reference           = const value_type&;
         using iterator                  = pointer;
@@ -52,11 +53,22 @@ namespace sidlib
             // 3. delete old block
 
             value_type* new_block = new value_type[new_capacity];
-            
+
+            if (new_capacity < m_size) {
+                m_size = new_capacity;
+            }
+
+            for (size_type i = 0; i < m_size; i++) {
+                new_block[i] = m_data[i];
+            }
+
+            delete[] m_data;
+            m_data = new_block;
+            m_capacity = new_capacity;
         }
 
     private:
-        value_type* m_data = new value_type[];
+        pointer m_data = new value_type[];
         size_type m_size = 0;
         size_type m_capacity = 0;
     };

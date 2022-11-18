@@ -125,10 +125,8 @@ namespace sidlib
         array() {
             fill(0);
         }
-        
+    
     private:
-        value_type m_data[elem_s];
-        
         [[nodiscard]] constexpr pointer data() noexcept {
             return m_data;
         }
@@ -138,9 +136,15 @@ namespace sidlib
 
         constexpr void out_of_range_check(size_type index) const {
             if (index >= elem_s) {
-                throw std::out_of_range(sidlib::format("\nRANGE ERROR: [sidlib::array]\n\t     Attempt to access index [{}] when max size is [{}]\n", index, elem_s));
+                throw std::out_of_range(sidlib::format(
+                    "\nRANGE ERROR: [sidlib::array]\n\t     "
+                    "Attempt to access index [{}] when max size is [{}]\n", index, elem_s));
             }
         }
+
+    private:
+        value_type m_data[elem_s];
+        
     };
 }
 

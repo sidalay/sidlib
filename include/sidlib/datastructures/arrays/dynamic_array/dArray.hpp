@@ -63,6 +63,12 @@ namespace sidlib
             return const_reverse_iterator{begin()};
         }
 
+        // utility
+        constexpr void push_back(const value_type& value) {
+            
+        }
+
+        // constructor
         darray() {
             // allocate 2 elements
             realloc(2);
@@ -86,7 +92,22 @@ namespace sidlib
         // pop_back
         // insert
     private:   
-        void realloc(size_type new_capacity) {
+        [[nodiscard]] constexpr pointer data() noexcept {
+            return m_data;
+        }
+        [[nodiscard]] constexpr const_pointer data() const noexcept {
+            return m_data;
+        }
+
+        constexpr void out_of_range_check(size_type index) const {
+            if (index >= elem_s) {
+                throw std::out_of_range(sidlib::format(
+                    "\nRANGE ERROR: [sidlib::darray]\n\t     "
+                    "Attempt to access index [{}] when max size is [{}]\n", index, elem_s));
+            }
+        }
+
+        constexpr void realloc(size_type new_capacity) {
             // 1. allocate a new block of memory
             // 2. copy/move elemnts from old to new
             // 3. delete old block

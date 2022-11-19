@@ -23,10 +23,11 @@ void print_capacity(const sidlib::darray<T>& darray) {
 
 int main() {
     sidlib::darray<std::string> data;
-
     // We can observe the capacity of data expanding
     print_dynamic(data);
     print_capacity(data);
+
+    std::cout << data.at(0);
 
     data.push_back("sid");
     data.push_back("loves");

@@ -24,6 +24,13 @@ namespace sidlib
         using reverse_iterator          = std::reverse_iterator<pointer>;
         using const_reverse_iterator    = std::reverse_iterator<const_pointer>;        
 
+        [[nodiscard]] constexpr pointer data() noexcept {
+            return m_data;
+        }
+        [[nodiscard]] constexpr const_pointer data() const noexcept {
+            return m_data;
+        }
+
         // iterators
         [[nodiscard]] constexpr auto begin() noexcept {
             return iterator{data()};
@@ -99,7 +106,7 @@ namespace sidlib
             return m_capacity;
         }
         [[nodiscard]] constexpr bool empty() const noexcept {
-            return size() == 0 ? true : false;
+            return size() == 0;
         }
 
         // utility
@@ -152,13 +159,6 @@ namespace sidlib
         // remove
         // insert
     private:   
-        [[nodiscard]] constexpr pointer data() noexcept {
-            return m_data;
-        }
-        [[nodiscard]] constexpr const_pointer data() const noexcept {
-            return m_data;
-        }
-
         constexpr void out_of_range_check(size_type index) const {
             if (index >= m_size) {
                 throw std::out_of_range(sidlib::format(

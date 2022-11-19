@@ -44,7 +44,7 @@ int main() {
 
     std::cout << "Data is empty: " << (Data.empty() ? "True" : "False") << '\n';
 
-    sidlib::array<int, 5> DataTwo;
+    sidlib::array<int, 5> DataTwo{};
 
     std::cout << "\n[Before Swap]: \n";
     std::cout << "DataOne Array\t: ";
@@ -67,4 +67,7 @@ int main() {
     catch (std::out_of_range& err) {
         std::cerr << err.what() << '\n';
     }
+
+    sidlib::array<int, 10> Aggregate{};
+    print_static(Aggregate);
 }

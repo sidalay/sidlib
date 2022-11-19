@@ -127,13 +127,7 @@ namespace sidlib
                 m_data[i] = temp[i];
             }
         }
-
-        // constructors
-        array() {
-            fill(0);
-        }
-    
-    private:
+        
         constexpr void out_of_range_check(size_type index) const {
             if (index >= elem_s) {
                 throw std::out_of_range(sidlib::format(
@@ -142,9 +136,7 @@ namespace sidlib
             }
         }
 
-    private:
-        value_type m_data[elem_s];
-        
+        value_type m_data[elem_s];    
     };
 }
 

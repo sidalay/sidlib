@@ -17,7 +17,7 @@ int main() {
     sidlib::array<int, 5> Data;
 
     for (size_t i = 0; i < Data.max_size(); ++i) {
-        Data[i] = i * 2;
+        Data[i] = static_cast<int>(i) * 2;
     }
     std::cout << "Print using normal for-loop\t: ";
     for (size_t i = 0; i < Data.max_size(); ++i) {

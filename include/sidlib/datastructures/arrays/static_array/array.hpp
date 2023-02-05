@@ -136,7 +136,7 @@ namespace sidlib
             }
         }
 
-        value_type m_data[elem_s];    
+        value_type m_data[elem_s];
     };
 }
 

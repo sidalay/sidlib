@@ -27,8 +27,6 @@ int main() {
     print_dynamic(data);
     print_capacity(data);
 
-    std::cout << data.at(0);
-
     data.push_back("sid");
     data.push_back("loves");
     data.push_back("c++");

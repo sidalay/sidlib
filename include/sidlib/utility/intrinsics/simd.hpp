@@ -1,5 +1,5 @@
-#ifndef SIDLIB_INTRINSICS_HPP
-#define SIDLIB_INTRINSICS_HPP
+#ifndef SIDLIB_SIMD_HPP
+#define SIDLIB_SIMD_HPP
 
 #include <immintrin.h>
 
@@ -28,4 +28,4 @@ namespace sidlib
     };
 }
 
-#endif // SIDLIB_INTRINSICS_HPP
+#endif // SIDLIB_SIMD_HPP

@@ -7,8 +7,8 @@ target_compile_options(compile_options INTERFACE
 
 add_executable(test_array test_array.cpp)
 add_executable(test_darray test_darray.cpp)
-add_executable(test_intrinsics test_intrinsics.cpp)
+add_executable(test_simd test_simd.cpp)
 
 target_link_libraries(test_array PRIVATE static_array compile_options)
 target_link_libraries(test_darray PRIVATE dynamic_array compile_options)
-target_link_libraries(test_intrinsics PRIVATE intrinsics compile_options)
+target_link_libraries(test_simd PRIVATE simd compile_options)

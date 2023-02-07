@@ -1,2 +1,2 @@
-add_library(intrinsics INTERFACE intrinsics.hpp)
-target_include_directories(intrinsics INTERFACE .)
+add_library(simd INTERFACE simd.hpp)
+target_include_directories(simd INTERFACE .)

@@ -24,7 +24,11 @@ namespace sidlib
 
     struct simd 
     {
-
+        // TODO:
+        // add, sub, mul, fma,
+        // load, set
+        // and, or, xor
+        // cvt
     };
 }
 
